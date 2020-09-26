@@ -8,8 +8,17 @@ body {
     width: 70%;
     float: left;
     background-color: antiquewhite;
+    overflow: hidden;
 }
 
+.text-box {
+    float: left;
+    position: relative;
+    background-color: aliceblue;
+    height: 100%;
+    width: 100%;
+    margin-top: 30px;
+}
 .code-blocks { 
     height: 100%;
     width: 30%;
