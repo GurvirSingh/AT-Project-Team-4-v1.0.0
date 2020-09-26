@@ -1,0 +1,48 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.text-editor {
+    height: 100%;
+    width: 70%;
+    float: left;
+    background-color: antiquewhite;
+}
+
+.code-blocks { 
+    height: 100%;
+    width: 30%;
+    float: right;
+    /* background-color: grey; */
+    overflow-x: scroll;
+    
+}
+.button-right {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.search {
+    float: right;
+    margin-top: 20px;
+    margin-right: 120px;
+    /* position: absolute; */
+    margin-left: 25px;
+}
+
+.form-control {
+    width: 300px !important;
+}
+
+.code-block-1 {
+    width: 500px;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 60px;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding-left: 20px;
+
+}
