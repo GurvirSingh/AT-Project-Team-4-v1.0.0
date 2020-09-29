@@ -1,8 +1,10 @@
+/* default body margin and padding */
 body {
     padding: 0px;
     margin: 0px;
 }
 
+/* Text editor styles */
 .text-editor {
     height: 100%;
     width: 70%;
@@ -19,6 +21,19 @@ body {
     width: 100%;
     margin-top: 30px;
 }
+
+.button-right {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+textarea {
+    font-size: 20px !important;
+    padding: 20px;
+}
+
+/* Code block styles */
 .code-blocks { 
     height: 100%;
     width: 30%;
@@ -27,12 +42,24 @@ body {
     overflow-x: scroll;
     
 }
-.button-right {
-    float: right;
-    margin-top: 20px;
-    margin-right: 20px;
+
+.code-block-1 {
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 60px;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding-left: 20px;
+
 }
 
+.button1 {
+    margin-left: 250px;
+    margin-top: -10px;
+}
+
+/* Search box */
 .search {
     float: right;
     margin-top: 20px;
@@ -42,16 +69,5 @@ body {
 }
 
 .form-control {
-    width: 300px !important;
-}
-
-.code-block-1 {
-    width: 500px;
-    height: 200px;
-    margin: 0 auto;
-    margin-top: 60px;
-    border: 1px solid black;
-    border-radius: 6px;
-    padding-left: 20px;
-
+    width: 200px !important;
 }

@@ -9,14 +9,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <!-- Text editor code -->
     <div class="text-editor">
         <h2 style="display: block; position: absolute; margin-left: 20px;"> Your Code: </h2>
-        <button type="button" class="btn btn-primary button-right">Output</button>
+        <button type="button" class="btn btn-primary button-right" onclick="showOp()">Output</button>
 
         <div class="text-box">
-            <textarea rows="100" cols="161"></textarea>
+            <textarea rows="100" cols="161" id="tb"></textarea>
         </div>
     </div>
+
+    <!-- Code blocks code -->
     <div class="code-blocks">
         <div class="search">
             <form class="form-inline">
@@ -25,11 +28,13 @@
             </form>
         </div>
 
+        <!-- Static code block examples -->
         <div class="code-block-1">
             <h3>For Loop</h3><br/>
             <p>for(let i = 0; i < x; i++) {
                 <p>//Code here</p>
             }</p>
+            <button class="button1 btn btn-primary" id="button1">Add</button>
         </div>
 
         <div class="code-block-1">
@@ -38,6 +43,7 @@
                 <p>//Code here</p>
             } else {
             }</p>
+            <button class="button1 btn btn-primary" id="button2">Add</button>
         </div>
 
         <div class="code-block-1">
@@ -45,13 +51,29 @@
             <p>while (x) {
                 <p>//Code here</p>
             }</p>
+            <button class="button1 btn btn-primary" id="button3">Add</button>
         </div>
 
         <div class="code-block-1">
             <h3>Div tags</h3><br/>
             <p>&lt;div&gt; &lt;/div&gt; </p>
+            <button class="button1 btn btn-primary" id="button4">Add</button>
         </div>
         
     </div>
 </body>
+
+<script>
+// Static implementation of adding a code block to the text editor 
+function addLoop() {
+  document.getElementById("tb").value = "for(let i = 0; i < x; i++) { }";
+}
+document.getElementById("button1").addEventListener("click", addLoop);
+
+// Static implementation of displaying the output in a new window
+function showOp() {
+    window.open('/output.html', '_blank');
+}
+</script>
+
 </html>
