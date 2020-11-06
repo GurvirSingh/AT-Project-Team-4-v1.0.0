@@ -8,9 +8,10 @@ function typeInTextarea(newText, el = document.querySelector('#tb')) {
 }
   
 // Static implementation of adding a code block to the text editor 
-var addloop = function addLoop(event) {
 
-    console.log(event.target.value);
+var addCode = function addLoop(event) {
+
+    console.log(event);
 
     
     if(event.target.value == 'for') {
@@ -32,14 +33,25 @@ var addloop = function addLoop(event) {
         }
         `;
         typeInTextarea(text);
+
+    } else if(event.target.value == 'multiplication') {
+        
+        text = `
+        function multiply(p1, p2) {
+            return p1 * p2; // The function returns the product of p1 and p2
+            }
+        `;
+        typeInTextarea(text);
     }
 };
 
-// document.getElementById("tb").value = "for(let i = 0; i < x; i++) { }";
-
-document.querySelector(DOM.codeBlocks).addEventListener("click", addloop);
+document.querySelector(DOM.codeBlocks).addEventListener("click", addCode);
 
 // Static implementation of displaying the output in a new window
 function showOp() {
     window.open('/output.html', '_blank');
+}
+
+function addCodeBlock() {
+    document.querySelector("#exampleModalCenter").classList.toggle("hidden");
 }
