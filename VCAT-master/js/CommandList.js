@@ -1,0 +1,40 @@
+var commandList = FuzzySet();
+commandList.add("select");
+commandList.add("click");
+commandList.add("scroll");
+commandList.add("complete");
+commandList.add("all");
+commandList.add("link");
+commandList.add("links");
+commandList.add("button");
+commandList.add("buttons");
+commandList.add("number");
+commandList.add("page");
+commandList.add("up");
+commandList.add("down");
+commandList.add("test");
+commandList.add("case");
+commandList.add("text input");
+commandList.add("text box");
+commandList.add("textbox");
+commandList.add("checkbox");
+commandList.add("check box");
+commandList.add("radio button");
+commandList.add("radio");
+commandList.add("dropdown");
+commandList.add("drop");
+commandList.add("down");
+commandList.add("deselect");
+commandList.add("generate");
+commandList.add("row");
+commandList.add("key");
+commandList.add("value");
+commandList.add("save");
+commandList.add("delete");
+commandList.add("hash");
+commandList.add("submit");
+
+//VCAT extend Ambar code starts
+commandList.add("go to line number");
+commandList.add("add code");
+//VCAT extend Ambar code ends
