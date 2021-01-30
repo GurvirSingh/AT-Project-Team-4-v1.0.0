@@ -20,90 +20,93 @@ error_reporting(0);
     <div class="text-editor">
         <h2 style="display: block; position: absolute; margin-left: 20px;"> Your Code: </h2>
         <button type="button" class="btn btn-primary button-right" onclick="showOp()">Output</button>
+        
         <button type="button" class="btn btn-success button-right" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add CodeBlock</button>
+        
+        <!-- Pop up -->
+        <!-- Button trigger modal -->
+        <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
+        <!--  Launch demo modal-->
+        <!--</button>-->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Please Note:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Hello, This is a demo for the <strong>Virtual Programming Assistant using VCAT</strong>, before you proceed you would need
+                to download the VCAT Google Chrome Extension and enable it for providing voice commands. <br/><br/>Download VCAT using
+                the button below, or watch a demo on how to use this application.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="https://chrome.google.com/webstore/detail/vcat/gjbnjhimmkpplfccacmmkglojjglmkld?hl=en" target="__blank"><button type="button" class="btn btn-primary">Download VCAT</button></a>
+                <a href="https://www.youtube.com/watch?v=MrRVlomk7s0&feature=youtu.be" target="__blank"><button type="button" class="btn btn-danger">Watch Demo</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+            $('#popup').modal('show');
+        </script>
+        
+        <!-- Button trigger modal -->
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modify Code Block</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                 <form method="POST" action="modifyCodeBlock.php">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Code Id</label>
+                    <input type="text" class="form-control block-name" name="blockName" id="recipient-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Block Name:</label>
+                    <input type="text" class="form-control block-name" name="blockName" id="recipient-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Code:</label>
+                    <input type="text" class="form-control code" name="code" id="recipient-code" required>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="message-text" class="col-form-label">Language:(default=JavaScript)</label>
+                    <input type="text" class="form-control language" name="language" value="javascript" id="recipient-name" >
+                </div> -->
+            </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!--<label class="switch button-right">-->
+          <p style="float:left; margin-top:25px; margin-left:67%">Light Mode: </p>
+          <input type="checkbox" style="float:right; margin-top:27px; margin-right:30px" onclick="toggleTheme();" checked>
+          <!--<span class="slider round"></span>-->
+        </label>
         <!-- Added -->
-    <script>
-			function download(filename, text) {
-			  var element = document.createElement('a');
-			  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-			  element.setAttribute('download', filename);
-
-			  element.style.display = 'none';
-			  document.body.appendChild(element);
-
-			  element.click();
-
-			  document.body.removeChild(element);
-			}
-			
-			function buttonClick(){
-				download("hello.txt","This is the content of my file :)");
-			}
-			
-			function createDoc(){
-				var opened = window.open("");
-				opened.document.write("<html><head><title>MyTitle</title></head><body>test</body></html>");
-			}
-			
-			function createList(){
-				var ul = document.createElement("UL");
-				var node, textnode; 
-
-
-				//document.getElementById("myList").appendChild(node);
-
-				for(let i = 0; i < 5; i++) {
-				//Code here
-				node = document.createElement("LI");
-				textnode = document.createTextNode("test"+(i+1));
-				node.appendChild(textnode);
-				ul.appendChild(node);
-				}
-
-				document.body.appendChild(ul);
-			}
-			
-			function setSelectionRange(input, selectionStart, selectionEnd) {
-			  if (input.setSelectionRange) {
-				input.focus();
-				input.setSelectionRange(selectionStart, selectionEnd);
-			  }
-			  else if (input.createTextRange) {
-				var range = input.createTextRange();
-				range.collapse(true);
-				range.moveEnd('character', selectionEnd);
-				range.moveStart('character', selectionStart);
-				range.select();
-			  }
-			}
-
-			function setCaretToPos (input, pos) {
-			   setSelectionRange(input, pos, pos);
-			}
-			
-			function setCaret(){
-				var line_number = document.getElementById("ip").value;
-				var element = document.getElementById("demo");
-				var text = element.value;
-				
-				var lines = element.value.split('\n');
-				for(var i = 0;i < lines.length;i++){
-					//code here using lines[i] which will give you each line
-					console.log("Line "+(i+1)+": "+lines[i]);
-				}
-				//console.log("text:"+element.value);
-				var position = 0;
-				for(var j=0; j< line_number-1; j++){
-					position = position + lines[j].length + 1;
-				}
-				setCaretToPos(element, position);
-			}
-
-		</script>
+   
 		<div class="container">
 			<div class="line-nums"><span>1</span></div>
-			<textarea id="tb" rows="100" cols="161"></textarea>
+			<textarea id="tb" rows="100" cols="161" spellcheck="false"></textarea>
         </div>
         <!-- End added -->
         <!-- <div class="text-box">
@@ -113,10 +116,10 @@ error_reporting(0);
         
     <!-- Code blocks code -->
     <div class="code-blocks">
-        <div class="search">
+        <div class="search" style="height: 34px !important;">
             <form class="form-inline" method="POST" action="index.php">
                 <input type="text" class="form-control mr-sm-2" type="search" name="searchQuery" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0 searchBtn" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0 searchBtn btn-success" type="submit">Search</button>
             </form>
         </div>
 
@@ -144,6 +147,8 @@ error_reporting(0);
                     echo '<div class="code-block-1">';
                     echo "<h3>".$row["blockname"]."</h3><br/>";
                     echo "<p id='".$row["codeid"]."'>".$row["code"]."</p>";
+                    echo "<button class='button1 btn btn-success' id='button2' onclick='modifyCodeBlocks();' value=".$row["blockname"].">Modify</button>";
+                    
                     echo "<button class='button1 btn btn-primary' id='button1' onclick='addCodeBlock(".$row["codeid"].");' value=".$row["blockname"].">Add</button>";
                     echo "</div>";
                     //echo "codeid: " . $row["codeid"]. " - Block Name: " . $row["blockname"]. " Code: " . $row["code"]. "<br>";
@@ -160,8 +165,12 @@ error_reporting(0);
                 while($row = $result->fetch_assoc()) {
                     echo '<div class="code-block-1">';
                     echo "<h3>".$row["blockname"]."</h3><br/>";
-                    echo "<p id='".$row["codeid"]."'>".$row["code"]."</p>";
-                    echo "<button class='button1 btn btn-primary' id='button1' onclick='addCodeBlock(".$row["codeid"].");' value=".$row["blockname"].">Add</button>";
+                    echo "<p id='".$row["codeid"]."'>".$row["code"]."</p><br>";
+                    
+                   // echo "<button type='button' class='button1 btn btn-success button-right' data-toggle='modal' data-target='#exampleModal2' data-whatever='@mdo' id='button2' style='float:right; disply:inline-block; margin-top:10px;' onclick='modifyCodeBlocks();' value=".$row["blockname"].">Modify</button>";
+                    
+                    echo "<button class='button1 btn btn-primary' id='button1' style='float:left; margin-top:-35px; margin-left:90px;' onclick='addCodeBlock(".$row["codeid"].");' value=".$row["blockname"].">Add</button>";
+                   
                     echo "</div>";
                     //echo "codeid: " . $row["codeid"]. " - Block Name: " . $row["blockname"]. " Code: " . $row["code"]. "<br>";
                 }
@@ -171,84 +180,7 @@ error_reporting(0);
             }
 			$conn->close();
 		?>
-        <script>
-			function download(filename, text) {
-			  var element = document.createElement('a');
-			  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-			  element.setAttribute('download', filename);
-
-			  element.style.display = 'none';
-			  document.body.appendChild(element);
-
-			  element.click();
-
-			  document.body.removeChild(element);
-			}
-			
-			function buttonClick(){
-				download("hello.txt","This is the content of my file :)");
-			}
-			
-			function createDoc(){
-				var opened = window.open("");
-				opened.document.write("<html><head><title>MyTitle</title></head><body>test</body></html>");
-			}
-			
-			function createList(){
-				var ul = document.createElement("UL");
-				var node, textnode; 
-
-
-				//document.getElementById("myList").appendChild(node);
-
-				for(let i = 0; i < 5; i++) {
-				//Code here
-				node = document.createElement("LI");
-				textnode = document.createTextNode("test"+(i+1));
-				node.appendChild(textnode);
-				ul.appendChild(node);
-				}
-
-				document.body.appendChild(ul);
-			}
-			
-			function setSelectionRange(input, selectionStart, selectionEnd) {
-			  if (input.setSelectionRange) {
-				input.focus();
-				input.setSelectionRange(selectionStart, selectionEnd);
-			  }
-			  else if (input.createTextRange) {
-				var range = input.createTextRange();
-				range.collapse(true);
-				range.moveEnd('character', selectionEnd);
-				range.moveStart('character', selectionStart);
-				range.select();
-			  }
-			}
-
-			function setCaretToPos (input, pos) {
-			   setSelectionRange(input, pos, pos);
-			}
-			
-			function setCaret(){
-				var line_number = document.getElementById("ip").value;
-				var element = document.getElementById("tb");
-				var text = element.value;
-				
-				var lines = element.value.split('\n');
-				for(var i = 0;i < lines.length;i++){
-					//code here using lines[i] which will give you each line
-					console.log("Line "+(i+1)+": "+lines[i]);
-				}
-				//console.log("text:"+element.value);
-				var position = 0;
-				for(var j=0; j< line_number-1; j++){
-					position = position + lines[j].length + 1;
-				}
-				setCaretToPos(element, position);
-			}
-
-		</script>
+        
         <!-- Static code block examples -->
         <!--div class="code-block-1">
             <h3>For Loop</h3><br/>
@@ -317,7 +249,42 @@ error_reporting(0);
             </div>
             </div>
         </div>
+        
+        <!-- Add code block Modal -->
+        <div class="modal2 fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Custom Code Blocks</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="addCodeBlock.php">
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Block Name:</label>
+                    <input type="text" class="form-control block-name" name="blockName" id="recipient-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Code:</label>
+                    <input type="text" class="form-control code" name="code" id="recipient-code" required>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="message-text" class="col-form-label">Language:(default=JavaScript)</label>
+                    <input type="text" class="form-control language" name="language" value="javascript" id="recipient-name" >
+                </div> -->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button class="btn btn-success my-2 my-sm-0 searchBtn" type="submit">Submit</button>
+            </form>
+            </div>
+            </div>
+            </div>
         </div>
+
+        </div> <!-- end of file -->
+        
 </body>
 
 <script src="scripts/main.js"></script>
