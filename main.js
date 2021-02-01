@@ -5,7 +5,6 @@ var DOM = {
 function typeInTextarea(newText, el = document.querySelector('#tb')) {
     const [start, end] = [el.selectionStart, el.selectionEnd];
     el.setRangeText(newText, start, end, 'select');
-
     setTimeout(function(){
         input = document.querySelector('#tb');
         input.focus(); 
@@ -137,6 +136,7 @@ function addCodeBlock(id){
 // }; 
 
 // document.querySelector(DOM.codeBlocks).addEventListener("click", addCode);
+
 
 // Static implementation of displaying the output in a new window
 function showOp() {

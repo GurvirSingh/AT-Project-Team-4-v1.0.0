@@ -1,4 +1,5 @@
 <?php
+
 $blockName = $_POST['blockName'];
 $code = $_POST['code'];
 $language = 'javascript';
@@ -17,4 +18,6 @@ header('location:https://vcatextend.000webhostapp.com');
 } else {
 echo "Error: " . $sql . "<br>" . $conn->error;
 }
+    $conn->close()
+
 ?>

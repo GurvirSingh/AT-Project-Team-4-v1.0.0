@@ -7,6 +7,7 @@
 	$password = "{{emyUE%QF9#J4Rg";
 	$dbname = "id15161901_vcatdb";
 
+
     // echo $searchQuery;
 
     // Create connection
