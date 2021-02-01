@@ -3,9 +3,10 @@
     $searchQuery = $_POST['searchQuery'];
 
     $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "vcat";
+	$username = "id15161901_ambardudhane";
+	$password = "{{emyUE%QF9#J4Rg";
+	$dbname = "id15161901_vcatdb";
+
 
     // echo $searchQuery;
 
