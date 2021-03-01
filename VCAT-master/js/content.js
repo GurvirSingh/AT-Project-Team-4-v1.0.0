@@ -1,3 +1,5 @@
+
+
 debugger;
 var scrollingElement;
 var currentFrom=null;
@@ -85,10 +87,39 @@ chrome.runtime.onMessage.addListener(
             debugger;
             performShowOutputCode();
         }
+        else if(commandType.value=="cursor"){
+            
+            console.log("content.js placing line cursor");
+            debugger;
+            setCaret(request.command, "line");
+        }
+        else if(commandType.value=="rightCursor"){
+            
+            console.log("content.js placing right cursor");
+            debugger;
+            setCaret(request.command, "rightCursor");
+        }
+        else if(commandType.value=="leftCursor"){
+            
+            console.log("content.js placing left cursor");
+            debugger;
+            setCaret(request.command, "leftCursor");
+        }
+        else if(commandType.value=="deleteLine"){
+            
+            console.log("content.js deleting line");
+            debugger;
+            deleteLine(request.command);
+        }
+        // else if(commandType.value=="selectBlocks"){
+            
+        //     console.log("content.js selecting text");
+        //     debugger;
+        //     selectBlocks(request.command);
+        // }
         //Ambar code changes end
         else{
             generateWarningToast("Failed to execute command","Failed to execute the command.<br>Retry!!","");
-
         }
 
 
@@ -139,6 +170,132 @@ function downloadCode(filename, text) {
 
     document.body.removeChild(element);
 }
+
+function setSelectionRange(input, selectionStart, selectionEnd) {
+    if (input.setSelectionRange) {
+      input.focus();
+      input.setSelectionRange(selectionStart, selectionEnd);
+    }
+    else if (input.createTextRange) {
+      var range = input.createTextRange();
+      range.collapse(true);
+      range.moveEnd('character', selectionEnd);
+      range.moveStart('character', selectionStart);
+      range.select();
+    }
+  }
+
+  function setCaretToPos (input, pos) {
+     setSelectionRange(input, pos, pos);
+  }
+  
+  function setCaret(request, cursorType){
+    
+
+    var head = request.head;
+    var identifier = head.next;
+
+    if(cursorType == "line"){
+        var lineNo = identifier.value;
+        debugger;
+        var line_number = lineNo;
+        var element = document.getElementById("tb");
+        var text = element.value;
+        
+        var lines = element.value.split('\n');
+        for(var i = 0;i < lines.length;i++){
+            //code here using lines[i] which will give you each line
+            console.log("Line "+(i+1)+": "+lines[i]);
+        }
+        //console.log("text:"+element.value);
+        var position = 0;
+        for(var j=0; j< line_number-1; j++){
+            position = position + lines[j].length + 1;
+        }
+        setCaretToPos(element, position);
+    }
+    else if(cursorType == "rightCursor"){
+        console.log("setCaret to right");
+        var element = document.getElementById("tb");
+        var startPos = element.selectionStart;
+        var blocks = identifier.value;
+        if(!blocks.match("[0-9]")){
+            blocks = getNumberFromWord(blocks);
+        }
+        debugger;
+        var position = startPos + blocks;
+        setCaretToPos(element, position);
+        debugger;
+    }
+    else if(cursorType == "leftCursor"){
+        console.log("setCaret to left");
+        var element = document.getElementById("tb");
+        var startPos = element.selectionStart;
+        var blocks = identifier.value;
+        if(!blocks.match("[0-9]")){
+            blocks = getNumberFromWord(blocks);
+        }
+        debugger;
+        var position = startPos - blocks;
+        setCaretToPos(element, position);
+        debugger;
+    }
+
+    
+  }
+
+  function getNumberFromWord(word){
+    if(word == "one") return 1; else if(word == "two") return 2; else if(word == "three") return 3;
+    else if(word == "four") return 4; else if(word == "five") return 5; else if(word == "six") return 6;
+    else if(word == "seven") return 7; else if(word == "eight") return 8; else if(word == "nine") return 9;
+    else if(word == "ten") return 10; 
+  }
+
+  function deleteLine(request){
+    var head = request.head;
+    var identifier = head.next;
+    var lineno = identifier.value;
+    if(!lineno.match("[0-9]")){
+        lineno = getNumberFromWord(lineno);
+    }
+    debugger;
+
+    var element = document.getElementById("tb");
+	var lines = element.value.split('\n');
+	var text = "";
+	for(var i = 0;i < lines.length;i++){
+		//code here using lines[i] which will give you each line
+		if( i != (lineno-1) )
+			text = text + lines[i] + "\n";
+	}
+	element.value = text;
+  }
+
+//   function selectBlocks(request){
+//     var head = request.head;
+//     var identifier = head.next;
+//     var tokens = identifier.value.split(" ");
+//     var blocks = tokens[0];
+//     if(!blocks.match("[0-9]")){
+//         blocks = getNumberFromWord(blocks);
+//     }
+//     var dir = tokens[1];
+
+//     const input = document.getElementById('tb');  
+//     var selectStart = input.selectionStart;
+//     console.log("Current cursor position:"+selectStart);
+//     input.setSelectionRange(selectStart, blocks);
+//     input.focus();
+    
+    
+
+    
+//     // if(dir == "left")
+//     //     input.setSelectionRange(input.selectionStart, blocks, "backward");
+//     // else if(dir == "right")
+//     //     input.setSelectionRange(input.selectionStart, blocks, "forward");
+//     debugger;
+//   }
 //Ambar code ends
 
 function performOpenURL(request) {

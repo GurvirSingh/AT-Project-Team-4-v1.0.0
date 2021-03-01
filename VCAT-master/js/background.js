@@ -326,6 +326,52 @@ chrome.tabs.onCreated.addListener(function(tabs) {
                   performAction(cmd);
                    
             },
+            '(computer) go to line *line':function(line){
+                console.log('calling from command..placing cursor at '+line);
+                debugger;
+                var cmd = new Command();
+                cmd.addCommandWord('cursor','command');
+                cmd.addCommandWord(line,'value');
+                performAction(cmd);
+                   
+            },
+            '(computer) move right by *blocks blocks':function(blocks){
+                console.log('calling from command..placing cursor right by '+blocks);
+                debugger;
+                var cmd = new Command();
+                cmd.addCommandWord('rightCursor','command');
+                cmd.addCommandWord(blocks,'value');
+                performAction(cmd);
+                   
+            },
+            '(computer) move left by *blocks blocks':function(blocks){
+                console.log('calling from command..placing cursor left by '+blocks);
+                debugger;
+                var cmd = new Command();
+                cmd.addCommandWord('leftCursor','command');
+                cmd.addCommandWord(blocks,'value');
+                performAction(cmd);
+                   
+            },
+            '(computer) delete line *line':function(line){
+                console.log('calling from command..deleting line no '+line);
+                debugger;
+                var cmd = new Command();
+                cmd.addCommandWord('deleteLine','command');
+                cmd.addCommandWord(line,'value');
+                performAction(cmd);
+                   
+            },
+            // '(computer) select *blocks *direction':function(blocks, direction){
+            //     console.log('calling from command..selecting text '+blocks + " by "+direction);
+            //     debugger;
+            //     var cmd = new Command();
+            //     cmd.addCommandWord('selectBlocks','command');
+            //     cmd.addCommandWord(blocks+" "+direction,'value');
+                
+            //     performAction(cmd);
+                   
+            // },
             //Ambar code ends  
             //'(computer) complete|end|finish|stop test case':function(){
              '(computer) complete test case':function(){
